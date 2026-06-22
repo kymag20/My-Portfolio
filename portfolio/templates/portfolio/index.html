@@ -69,7 +69,7 @@
           {% if profile.profile_photo %}
           <img src="{{ profile.profile_photo.url }}" alt="{{ profile.hero_name_line1 }}" class="profile-photo" onerror="this.onerror=null; this.src='{% static 'portfolio/img/profile.jpg' %}';">
           {% else %}
-          <div class="profile-avatar">{{ profile.hero_initials }}</div>
+          <img src="{% static 'portfolio/img/profile.jpg' %}" alt="{{ profile.hero_name_line1 }}" class="profile-photo">
           {% endif %}
         </div>
         {% if skill_chips %}
@@ -116,7 +116,7 @@
           {% if profile.profile_photo %}
           <img src="{{ profile.profile_photo.url }}" alt="{{ profile.hero_name_line1 }}" class="about-portrait" onerror="this.onerror=null; this.src='{% static 'portfolio/img/profile.jpg' %}';">
           {% else %}
-          <span class="about-initials">{{ profile.hero_initials }}</span>
+          <img src="{% static 'portfolio/img/profile.jpg' %}" alt="{{ profile.hero_name_line1 }}" class="about-portrait">
           {% endif %}
         </div>
         <div class="about-badge">
