@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ profile.site_title }}</title>
+  <meta name="description" content="{{ profile.meta_description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+</head>
+<body>
+
+  <div id="glow"></div>
+
+  <nav id="nav">
+    <a href="#" class="logo">{{ profile.logo_text }}</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">&times;</button>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#experience">Experience</a>
+    <a href="#case-studies">Case Studies</a>
+    <a href="#tools">Tools</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-blob1"></div>
+    <div class="hero-blob2"></div>
+    <div class="hero-layout">
+      <div class="hero-content">
+        {% if profile.availability_badge %}
+        <div class="availability-badge">{{ profile.availability_badge }}</div>
+        {% endif %}
+        <div class="hero-tag">{{ profile.hero_tag }}</div>
+        <h1 class="hero-title">
+          <span class="line1">{{ profile.hero_name_line1 }}</span>
+          <span class="line2">{{ profile.hero_name_line2 }}</span>
+        </h1>
+        <p class="hero-role">{{ profile.hero_role }}</p>
+        <p class="hero-sub">{{ profile.hero_subtitle }}</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Hire Me
+          </a>
+          <a href="#case-studies" class="btn-ghost">View My Work</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="profile-ring">
+          {% if profile.profile_photo %}
+          <img src="{{ profile.profile_photo.url }}" alt="{{ profile.hero_name_line1 }}" class="profile-photo">
+          {% else %}
+          <div class="profile-avatar">{{ profile.hero_initials }}</div>
+          {% endif %}
+        </div>
+        {% if skill_chips %}
+        <div class="skill-chips">
+          {% for chip in skill_chips %}
+          <span class="skill-chip">{{ chip.label }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <svg viewBox="0 0 24 24" stroke-width="2" fill="none"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Scroll
+    </div>
+  </section>
+
+  {% if stats %}
+  <div class="stats-bar" id="stats">
+    {% for stat in stats %}
+    <div class="stat">
+      <div class="stat-num">{{ stat.value }}</div>
+      <div class="stat-label">{{ stat.label }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if brands %}
+  <div class="brands-strip reveal">
+    <p class="brands-label">{{ profile.brands_label }}</p>
+    <div class="brands-row">
+      {% for brand in brands %}
+      <span class="brand-name">{{ brand.name }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-frame">
+          {% if profile.profile_photo %}
+          <img src="{{ profile.profile_photo.url }}" alt="{{ profile.hero_name_line1 }}" class="about-portrait">
+          {% else %}
+          <span class="about-initials">{{ profile.hero_initials }}</span>
+          {% endif %}
+        </div>
+        <div class="about-badge">
+          <div class="badge-icon">{{ profile.education_icon }}</div>
+          <div class="badge-text">
+            <strong>{{ profile.education_title }}</strong>
+            <span>{{ profile.education_subtitle }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <div class="section-tag">{{ profile.about_section_tag }}</div>
+        <h2 class="section-title">{{ profile.about_title|linebreaksbr }}</h2>
+        {% if profile.about_bio_1 %}<p class="about-bio">{{ profile.about_bio_1 }}</p>{% endif %}
+        {% if profile.about_bio_2 %}<p class="about-bio">{{ profile.about_bio_2 }}</p>{% endif %}
+        {% if profile.about_bio_3 %}<p class="about-bio">{{ profile.about_bio_3 }}</p>{% endif %}
+        <a href="#contact" class="btn-primary" style="display:inline-flex; margin-top: 8px;">
+          Hire Me
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        {% if values %}
+        <div class="values-list">
+          {% for value in values %}
+          <div class="value-item">
+            <div class="value-icon">{{ value.icon }}</div>
+            <h4>{{ value.title }}</h4>
+            <p>{{ value.description }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="section-tag reveal">{{ profile.services_section_tag }}</div>
+    <h2 class="section-title reveal">{{ profile.services_title|linebreaksbr }}</h2>
+    <p class="section-sub reveal">{{ profile.services_subtitle }}</p>
+    {% if services %}
+    <div class="skills-grid">
+      {% for service in services %}
+      <div class="skill-card reveal">
+        <div class="skill-head">
+          <span class="skill-emoji">{{ service.icon }}</span>
+          <h3>{{ service.title }}</h3>
+        </div>
+        <p>{{ service.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <section id="experience">
+    <div class="section-tag reveal">{{ profile.experience_section_tag }}</div>
+    <h2 class="section-title reveal">{{ profile.experience_title|linebreaksbr }}</h2>
+    <p class="section-sub reveal">{{ profile.experience_subtitle }}</p>
+    {% if experiences %}
+    <div class="timeline">
+      {% for exp in experiences %}
+      <div class="timeline-item reveal">
+        <div class="timeline-date">{{ exp.date_range }}</div>
+        <h3>{{ exp.title }}</h3>
+        <div class="timeline-company">{{ exp.company }}</div>
+        {% if exp.bullet_list %}
+        <ul>
+          {% for bullet in exp.bullet_list %}
+          <li>{{ bullet }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  {% if testimonials %}
+  <section id="testimonials">
+    <div class="section-tag reveal">{{ profile.testimonials_section_tag }}</div>
+    <h2 class="section-title reveal">{{ profile.testimonials_title|linebreaksbr }}</h2>
+    <div class="testimonials-grid">
+      {% for item in testimonials %}
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">{{ item.quote }}</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">{{ item.author_initial }}</div>
+          <div class="author-info">
+            <strong>{{ item.author_name }}</strong>
+            <span>{{ item.author_role }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section id="case-studies">
+    <div class="section-tag reveal">{{ profile.case_studies_section_tag }}</div>
+    <h2 class="section-title reveal">{{ profile.case_studies_title|linebreaksbr }}</h2>
+    <p class="section-sub reveal">{{ profile.case_studies_subtitle }}</p>
+    {% if case_studies %}
+    <div class="case-list">
+      {% for case in case_studies %}
+      <div class="case-item reveal">
+        <button class="case-header" type="button">
+          <div class="case-header-left">
+            <span class="case-num">{{ case.number }}</span>
+            <h3>{{ case.title }}</h3>
+          </div>
+          <svg class="case-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="case-body">
+          <div class="case-body-inner">
+            <p>{{ case.summary }}</p>
+            {% if case.challenge_list %}
+            <div class="case-section">
+              <h4>Challenge</h4>
+              <ul>
+                {% for item in case.challenge_list %}
+                <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if case.action_list %}
+            <div class="case-section">
+              <h4>What I Did</h4>
+              <ul>
+                {% for item in case.action_list %}
+                <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if case.outcome_list %}
+            <div class="case-section">
+              <h4>Outcome</h4>
+              <ul>
+                {% for item in case.outcome_list %}
+                <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <section id="tools">
+    <div class="section-tag reveal">{{ profile.tools_section_tag }}</div>
+    <h2 class="section-title reveal">{{ profile.tools_title|linebreaksbr }}</h2>
+    <p class="section-sub reveal">{{ profile.tools_subtitle }}</p>
+    {% if tool_categories %}
+    <div class="tools-categories">
+      {% for category in tool_categories %}
+      <div class="tools-category reveal">
+        <h4>{{ category.name }}</h4>
+        <div class="tools-strip">
+          {% for tool in category.tools.all %}
+          <span class="tool-pill"><span class="tool-dot"></span>{{ tool.name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-tag reveal">{{ profile.contact_section_tag }}</div>
+      <h2 class="section-title reveal">{{ profile.contact_title|linebreaksbr }}</h2>
+      <p class="section-sub reveal">{{ profile.contact_subtitle }}</p>
+
+      <div class="contact-info-grid reveal">
+        <div class="contact-info-item">
+          <div class="ci-icon">✉️</div>
+          <div class="ci-text">
+            <strong>Email</strong>
+            <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">📞</div>
+          <div class="ci-text">
+            <strong>Phone / WhatsApp</strong>
+            <a href="tel:{{ profile.phone|cut:' ' }}">{{ profile.phone }}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card reveal">
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Subject (e.g. Hiring Inquiry)">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about the role or project you need help with…" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Send Message ✉</button>
+        </form>
+      </div>
+
+      {% if profile.linkedin_url %}
+      <div class="social-links reveal">
+        <a href="{{ profile.linkedin_url }}" class="social-link" target="_blank" rel="noopener">💼 {{ profile.linkedin_label }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <footer>
+    <a href="#" class="logo">{{ profile.logo_text }}</a>
+    <p>{{ profile.footer_line1 }}<br>{{ profile.footer_line2 }}</p>
+  </footer>
+
+  <div class="toast" id="toast">{{ profile.toast_message }}</div>
+
+  <script src="{% static 'portfolio/js/main.js' %}"></script>
+</body>
+</html>
