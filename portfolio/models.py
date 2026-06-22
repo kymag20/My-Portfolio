@@ -27,7 +27,7 @@ class SiteProfile(models.Model):
         )
     )
     hero_initials = models.CharField(max_length=10, default='CJ')
-    profile_photo = models.ImageField(upload_to='profile/', blank=True, null=True)
+    profile_photo = models.FileField(upload_to='profile/', blank=True, null=True)
 
     brands_label = models.CharField(max_length=200, default="Brands & Companies I've Worked With")
 
