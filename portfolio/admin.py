@@ -1,8 +1,10 @@
 from django.contrib import admin
+from django.utils.html import format_html
 
 from .models import (
     Brand,
     CaseStudy,
+    Certificate,
     Experience,
     Service,
     SiteProfile,
@@ -67,6 +69,9 @@ class SiteProfileAdmin(admin.ModelAdmin):
         }),
         ('Tools Section', {
             'fields': ('tools_section_tag', 'tools_title', 'tools_subtitle'),
+        }),
+        ('Certificates Section', {
+            'fields': ('certificates_section_tag', 'certificates_title', 'certificates_subtitle'),
         }),
         ('Contact & Footer', {
             'fields': (
@@ -144,3 +149,19 @@ class ToolCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'order')
     list_editable = ('order',)
     inlines = [ToolInline]
+
+
+@admin.register(Certificate)
+class CertificateAdmin(admin.ModelAdmin):
+    list_display = ('title', 'issuer', 'date_earned', 'preview', 'order')
+    list_editable = ('order',)
+    fields = ('title', 'issuer', 'date_earned', 'image', 'order')
+
+    @admin.display(description='Preview')
+    def preview(self, obj):
+        if obj.image:
+            return format_html(
+                '<img src="{}" style="height:60px;border-radius:8px;object-fit:cover;" />',
+                obj.image.url,
+            )
+        return '—'

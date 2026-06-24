@@ -839,6 +839,173 @@ section {
   color: var(--pink);
 }
 
+#certificates { background: var(--bg); }
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.certificate-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--card-rad);
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font-family: inherit;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.certificate-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(236,72,153,0.3);
+}
+
+.certificate-image-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--bg3);
+}
+
+.certificate-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.certificate-card:hover .certificate-image {
+  transform: scale(1.05);
+}
+
+.certificate-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificate-card:hover .certificate-overlay {
+  opacity: 1;
+}
+
+.certificate-overlay span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.certificate-info {
+  padding: 20px;
+}
+
+.certificate-info h3 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.certificate-info p {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.cert-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.cert-lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cert-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+}
+
+.cert-lightbox-content {
+  position: relative;
+  z-index: 1;
+  max-width: min(900px, 92vw);
+  max-height: 90vh;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transform: scale(0.92);
+  transition: transform 0.3s ease;
+}
+
+.cert-lightbox.open .cert-lightbox-content {
+  transform: scale(1);
+}
+
+.cert-lightbox-title {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.cert-lightbox-image {
+  width: 100%;
+  max-height: calc(90vh - 120px);
+  object-fit: contain;
+  border-radius: 12px;
+  background: var(--bg3);
+}
+
+.cert-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.cert-lightbox-close:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
 #tools { background: var(--bg); }
 
 .tools-categories {
@@ -1095,6 +1262,7 @@ footer p { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
   .hero-visual { display: none; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
   .tools-categories { grid-template-columns: repeat(2, 1fr); }
+  .certificates-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1109,6 +1277,7 @@ footer p { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
   .skills-grid { grid-template-columns: 1fr; }
   .values-list { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
+  .certificates-grid { grid-template-columns: 1fr; }
   .tools-categories { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .contact-card { padding: 32px 20px; }

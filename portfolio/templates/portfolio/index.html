@@ -22,6 +22,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#case-studies">Case Studies</a></li>
+      <li><a href="#certificates">Certificates</a></li>
       <li><a href="#tools">Tools</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -36,6 +37,7 @@
     <a href="#services">Services</a>
     <a href="#experience">Experience</a>
     <a href="#case-studies">Case Studies</a>
+    <a href="#certificates">Certificates</a>
     <a href="#tools">Tools</a>
     <a href="#contact">Contact</a>
   </div>
@@ -272,6 +274,36 @@
     {% endif %}
   </section>
 
+  {% if certificates %}
+  <section id="certificates">
+    <div class="section-tag reveal">{{ profile.certificates_section_tag }}</div>
+    <h2 class="section-title reveal">{{ profile.certificates_title|linebreaksbr }}</h2>
+    <p class="section-sub reveal">{{ profile.certificates_subtitle }}</p>
+    <div class="certificates-grid">
+      {% for cert in certificates %}
+      <button type="button" class="certificate-card reveal" data-cert-title="{{ cert.title }}" data-cert-image="{{ cert.image.url }}">
+        <div class="certificate-image-wrap">
+          <img src="{{ cert.image.url }}" alt="{{ cert.title }}" class="certificate-image" loading="lazy">
+          <div class="certificate-overlay">
+            <span>View Certificate</span>
+          </div>
+        </div>
+        <div class="certificate-info">
+          <h3>{{ cert.title }}</h3>
+          {% if cert.issuer or cert.date_earned %}
+          <p>
+            {% if cert.issuer %}{{ cert.issuer }}{% endif %}
+            {% if cert.issuer and cert.date_earned %} · {% endif %}
+            {% if cert.date_earned %}{{ cert.date_earned }}{% endif %}
+          </p>
+          {% endif %}
+        </div>
+      </button>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   <section id="tools">
     <div class="section-tag reveal">{{ profile.tools_section_tag }}</div>
     <h2 class="section-title reveal">{{ profile.tools_title|linebreaksbr }}</h2>
@@ -353,6 +385,15 @@
   </footer>
 
   <div class="toast" id="toast">{{ profile.toast_message }}</div>
+
+  <div class="cert-lightbox" id="certLightbox" aria-hidden="true">
+    <div class="cert-lightbox-backdrop" id="certLightboxBackdrop"></div>
+    <div class="cert-lightbox-content">
+      <button type="button" class="cert-lightbox-close" id="certLightboxClose" aria-label="Close">&times;</button>
+      <p class="cert-lightbox-title" id="certLightboxTitle"></p>
+      <img src="" alt="" class="cert-lightbox-image" id="certLightboxImage">
+    </div>
+  </div>
 
   <script src="{% static 'portfolio/js/main.js' %}"></script>
 </body>

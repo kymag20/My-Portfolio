@@ -67,6 +67,12 @@ class SiteProfile(models.Model):
         default='The platforms and software I use daily to deliver results.'
     )
 
+    certificates_section_tag = models.CharField(max_length=100, default='Credentials')
+    certificates_title = models.CharField(max_length=200, default='Certificates & Training.')
+    certificates_subtitle = models.TextField(
+        default='Professional certifications and completed training programs.',
+    )
+
     contact_section_tag = models.CharField(max_length=100, default='Get In Touch')
     contact_title = models.CharField(max_length=200, default='Ready to Work Together?')
     contact_subtitle = models.TextField(
@@ -270,3 +276,19 @@ class Tool(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Certificate(models.Model):
+    title = models.CharField(max_length=200, help_text='Example: Shopify Foundations Certificate')
+    issuer = models.CharField(max_length=200, blank=True, help_text='Example: Shopify, Coursera, TESDA')
+    date_earned = models.CharField(max_length=50, blank=True, help_text='Example: March 2024')
+    image = models.FileField(upload_to='certificates/', help_text='Upload a photo or scan of your certificate.')
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Certificate'
+        verbose_name_plural = 'Certificates'
+
+    def __str__(self):
+        return self.title

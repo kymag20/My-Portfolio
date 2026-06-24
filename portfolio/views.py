@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import (
     Brand,
     CaseStudy,
+    Certificate,
     Experience,
     Service,
     SiteProfile,
@@ -26,6 +27,7 @@ def home(request):
         'experiences': Experience.objects.all(),
         'testimonials': Testimonial.objects.all(),
         'case_studies': CaseStudy.objects.all(),
+        'certificates': Certificate.objects.all(),
         'tool_categories': ToolCategory.objects.prefetch_related('tools'),
     }
     return render(request, 'portfolio/index.html', context)
